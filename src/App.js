@@ -1,24 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import src1 from './intechnic.mp4';
+import poster from './intechnic.jpg';
+import './index.scss';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="background-cover">
+        <video autoPlay muted loop playsInline preload="none" poster={poster}>
+          <source src={src1} type="video/mp4" />
+        </video>
+      </div>
+      <div className="inroText">
+        <h1>Sajib Kumar Biswas</h1>
+        <p>I am a web developer</p>
+      </div>
     </div>
   );
 }
