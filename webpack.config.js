@@ -1,8 +1,11 @@
+const path = require('path');
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ImageminPlugin = require("imagemin-webpack");
-const path = require('path');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
 	entry: './src/index.js',
@@ -10,13 +13,6 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'main.js'
 
-	},
-	mode: 'development',
-	devServer: {
-		contentBase: path.join(__dirname, "dist/"),
-		compress: true,
-		port: 3025,
-		open: true
 	},
 	module: {
 		rules: [
@@ -58,7 +54,15 @@ module.exports = {
 				}
 			},
 			{
-				test: /\.(jpe?g|png|gif|svg|mp4)$/i,
+				test: /\.(jpe?g|png|gif|svg)$/i,
+				use: [
+				  {
+					loader: "file-loader"
+				  }
+				]
+			  },
+			  {
+				test: /\.(mp4|webm|ogg)$/i,
 				use: [
 				  {
 					loader: "file-loader"
@@ -71,11 +75,33 @@ module.exports = {
 		minimizer: [
 		  new UglifyJsPlugin({
 			test: /\.js(\?.*)?$/i,
-			cache: true,
+			cache: true
+			// mangle: true,
+            // sourcemap: false,
+            // debug: false,
+			// compress: {
+            //     warnings: false,
+            //     screw_ie8: true,
+            //     conditionals: true,
+            //     unused: true,
+            //     comparisons: true,
+            //     sequences: true,
+            //     dead_code: true,
+            //     evaluate: true,
+            //     if_return: true,
+            //     join_vars: true
+			// },
+			// output: {
+            //     comments: false
+            // },
+
 		  }),
 		],
 	  },
 	plugins: [
+		new webpack.EnvironmentPlugin({
+			NODE_ENV: 'production'
+		  }),
 		new HtmlWebPackPlugin({
 			template: path.resolve(__dirname, 'public/index.html'),
 			filename: 'index.html'
@@ -111,6 +137,22 @@ module.exports = {
 				]
 			  ]
 			}
-		  })
+		  }),
+		  new SWPrecacheWebpackPlugin({
+			cacheId: 'offline-app',
+			dontCacheBustUrlsMatching: /\.\w{8}\./,
+			filename: 'service-worker.js',
+			minify: true,
+			navigateFallback: 'index.html',
+			staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+
+		  }),
+		new CompressionPlugin({
+			algorithm: "gzip",
+			test: /\.js$|\.css$|\.html$/,
+			cache: true
+			
+			
+		})
 	]
 };
