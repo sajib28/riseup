@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
-import src1 from '../intechnic.mp4';
-import poster from '../intechnic.jpg';
-import '../index.scss';
-import DemoState from './state/DemoState';
+import Intro from '../components/intro/Intro';
+import simpleParallax from 'simple-parallax-js';
+// import Scrollbar from 'smooth-scrollbar';
+import '../assests/scss/main.scss';
 class App extends Component {
+  componentDidMount() {
+    var image = document.getElementsByClassName('thumbnail');
+    new simpleParallax(image, {
+      scale: 1.5
+    });
+
+    // Scrollbar.init(document.querySelector('#my-scrollbar'));
+
+  }
   render() {
     return (
-      <div className="App">
-      <div className="intro">
-        <div className="background-cover">
-          <video autoPlay muted loop playsInline preload="none" poster={poster}>
-            <source src={src1} type="video/mp4" />
-          </video>
-        </div>
-        <div className="inroText">
-          <h1>Sajib Kumar Biswas</h1>
-          <p>I am a web developer</p>
-        </div>
-        </div>
-        <DemoState />
+      <div className="App scrollbar-light-blue">
+        <Intro />
+        {/* <img className="thumbnail" src={poster} alt="Image" /> */}
       </div>
     )
   }

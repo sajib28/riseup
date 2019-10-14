@@ -14,10 +14,23 @@ module.exports = {
 		filename: 'main.js'
 
 	},
+	mode: 'development',
+	devServer: {
+		contentBase: path.join(__dirname, "dist/"),
+		open: true,
+		watchContentBase: true,
+		hot: true,
+		compress: true,
+		overlay: {
+			errors: true,
+			warnings: true
+		}
+
+	},
 	module: {
 		rules: [
 			{
-				test: /\.js?$/,
+				test: /\.(js|jsx)?$/,
 				exclude: /node_module/,
 				use: {
 					loader: 'babel-loader',
@@ -36,6 +49,7 @@ module.exports = {
 						loader: MiniCssExtractPlugin.loader,
 						options: {
 							minimize: true
+							
 						},
 					},
 					'css-loader',
@@ -43,6 +57,18 @@ module.exports = {
 				]
 
 			},
+			{
+				test: /\.css$/,
+				use: [
+					{
+						loader:'file-loader',
+						options: {
+							outputPath: 'css'
+						}
+					}
+					
+				]
+			  },
 			{
 				test: /\.(html)$/,
 				use: {
@@ -56,52 +82,57 @@ module.exports = {
 			{
 				test: /\.(jpe?g|png|gif|svg)$/i,
 				use: [
-				  {
-					loader: "file-loader"
-				  }
+					{
+						loader: "file-loader",
+						options: {
+							outputPath: 'images'
+						}
+					}
+
 				]
-			  },
-			  {
+			},
+			{
 				test: /\.(mp4|webm|ogg)$/i,
 				use: [
-				  {
-					loader: "file-loader"
-				  }
+					{
+						loader: "file-loader",
+						options: {
+							outputPath: 'media',
+						},
+					}
+
 				]
-			  }
+			}
 		]
 	},
 	optimization: {
 		minimizer: [
-		  new UglifyJsPlugin({
-			test: /\.js(\?.*)?$/i,
-			cache: true
-			// mangle: true,
-            // sourcemap: false,
-            // debug: false,
-			// compress: {
-            //     warnings: false,
-            //     screw_ie8: true,
-            //     conditionals: true,
-            //     unused: true,
-            //     comparisons: true,
-            //     sequences: true,
-            //     dead_code: true,
-            //     evaluate: true,
-            //     if_return: true,
-            //     join_vars: true
-			// },
-			// output: {
-            //     comments: false
-            // },
+			new UglifyJsPlugin({
+				test: /\.js(\?.*)?$/i,
+				cache: true
+				// mangle: true,
+				// sourcemap: false,
+				// debug: false,
+				// compress: {
+				//     warnings: false,
+				//     screw_ie8: true,
+				//     conditionals: true,
+				//     unused: true,
+				//     comparisons: true,
+				//     sequences: true,
+				//     dead_code: true,
+				//     evaluate: true,
+				//     if_return: true,
+				//     join_vars: true
+				// },
+				// output: {
+				//     comments: false
+				// },
 
-		  }),
+			}),
 		],
-	  },
+	},
 	plugins: [
-		new webpack.EnvironmentPlugin({
-			NODE_ENV: 'production'
-		  }),
 		new HtmlWebPackPlugin({
 			template: path.resolve(__dirname, 'public/index.html'),
 			filename: 'index.html'
@@ -116,29 +147,33 @@ module.exports = {
 		new ImageminPlugin({
 			bail: false, // Ignore errors on corrupted images
 			cache: true,
+			// pngquant: ({quality: [0.5, 0.5]}),
 			imageminOptions: {
-			  // Before using imagemin plugins make sure you have added them in `package.json` (`devDependencies`) and installed them
-	   
-			  // Lossless optimization with custom option
-			  // Feel free to experiment with options for better result for you
-			  plugins: [
-				["gifsicle", { interlaced: true }],
-				["jpegtran", { progressive: true }],
-				["optipng", { optimizationLevel: 2 }],
-				[
-				  "svgo",
-				  {
-					plugins: [
-					  {
-						removeViewBox: false
-					  }
+				// Before using imagemin plugins make sure you have added them in `package.json` (`devDependencies`) and installed them
+
+				// Lossless optimization with custom option
+				// Feel free to experiment with options for better result for you
+				plugins: [
+					["gifsicle", { interlaced: true }],
+					["jpegtran", {
+						progressive: true,
+						quality: 80
+					}],
+					["optipng", { optimizationLevel: 9 }],
+					[
+						"svgo",
+						{
+							plugins: [
+								{
+									removeViewBox: false
+								}
+							]
+						}
 					]
-				  }
 				]
-			  ]
 			}
-		  }),
-		  new SWPrecacheWebpackPlugin({
+		}),
+		new SWPrecacheWebpackPlugin({
 			cacheId: 'offline-app',
 			dontCacheBustUrlsMatching: /\.\w{8}\./,
 			filename: 'service-worker.js',
@@ -146,13 +181,6 @@ module.exports = {
 			navigateFallback: 'index.html',
 			staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
 
-		  }),
-		new CompressionPlugin({
-			algorithm: "gzip",
-			test: /\.js$|\.css$|\.html$/,
-			cache: true
-			
-			
 		})
 	]
 };
