@@ -12,23 +12,13 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'main.js'
-
-	},
-	mode: 'development',
-	devServer: {
-		contentBase: path.join(__dirname, "dist/"),
-		open: true,
-		watchContentBase: true,
-		hot: true,
-		compress: true,
-		overlay: {
-			errors: true,
-			warnings: true
-		}
+		
 
 	},
 	module: {
 		rules: [
+			{ test: /\.(js)$/, use: 'babel-loader' },
+			{ test: /\.css$/, use: ['style-loader', 'css-loader']},
 			{
 				test: /\.(js|jsx)?$/,
 				exclude: /node_module/,
@@ -49,7 +39,7 @@ module.exports = {
 						loader: MiniCssExtractPlugin.loader,
 						options: {
 							minimize: true
-							
+
 						},
 					},
 					'css-loader',
@@ -61,14 +51,14 @@ module.exports = {
 				test: /\.css$/,
 				use: [
 					{
-						loader:'file-loader',
+						loader: 'file-loader',
 						options: {
 							outputPath: 'css'
 						}
 					}
-					
+
 				]
-			  },
+			},
 			{
 				test: /\.(html)$/,
 				use: {
@@ -102,7 +92,8 @@ module.exports = {
 					}
 
 				]
-			}
+			},
+
 		]
 	},
 	optimization: {
@@ -131,6 +122,20 @@ module.exports = {
 
 			}),
 		],
+	},
+	mode: 'development',
+	devServer: {
+		historyApiFallback: true,
+		contentBase: path.join(__dirname, "dist/"),
+		open: true,
+		watchContentBase: true,
+		hot: true,
+		compress: true,
+		overlay: {
+			errors: true,
+			warnings: true
+		}
+
 	},
 	plugins: [
 		new HtmlWebPackPlugin({
@@ -182,5 +187,6 @@ module.exports = {
 			staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
 
 		})
+
 	]
 };

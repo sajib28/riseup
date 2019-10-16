@@ -1,0 +1,43 @@
+  /* ----------- Supported All Cross browsers mixins ----------- */
+@mixin transition($args...) {
+    -webkit-transition: $args;
+    -moz-transition: $args;
+    -ms-transition: $args;
+    -o-transition: $args;
+    transition: $args;
+  }
+  @mixin transform($property) {
+    -webkit-transform: $property;
+    -moz-transition: $property;
+    -ms-transform: $property;
+    -o-transition: $property;
+    transform: $property;
+  }
+  @mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    -o-border-radius: $radius;
+    border-radius: $radius;
+}
+@mixin box-shadow($left, $top, $blur, $color) {
+    -webkit-box-shadow: $left $top $blur $color;
+    -moz-box-shadow: $left $top $blur $color;
+    -ms-box-shadow: $left $top $blur $color;
+    -o-box-shadow: $left $top $blur $color;
+    box-shadow: $left $top $blur $color;
+}
+@mixin translate($args) {
+    transform: translate($args);
+    transform: -webkit-translate($args);
+    transform: -moz-translate($args);
+    transform: -ms-translate($args);
+    transform: -o-translate($args);
+}
+
+  @mixin opacity($opacity) {
+    opacity: $opacity;
+    $opacity-ie: $opacity * 100;
+    filter: alpha(opacity=$opacity-ie); //IE8
+  }
+  /* ----------- End  Supported All Cross browsers mixins ----------- */
