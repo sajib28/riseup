@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Nav from '../../commonTools/Nav';
 import Footer from '../../commonTools/Footer';
+import BackgroundImage from '../../../assets/img/event.jpg';
 import Banner from '../../commonTools/Banner';
 import Accordion from '../../commonTools/Accordion';
 
@@ -9,7 +10,7 @@ class Service extends Component {
         return (
 <div className="career">
                 <Nav />
-                <Banner/>
+                <Banner id="serviceBanner" backgroundImage={BackgroundImage} />
                 <Accordion/>
                 <section className="cv-form">
                     <div className="container">

@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import Nav from '../../commonTools/Nav';
 import Footer from '../../commonTools/Footer';
 import Banner from '../../commonTools/Banner';
-import Accordion from '../../commonTools/Accordion';
+import BackgroundImage from '../../../assets/img/event.jpg';
+import Accordion from './Accordion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 class Career extends Component {
@@ -10,7 +11,7 @@ class Career extends Component {
         return (
             <div className="career">
                 <Nav />
-                <Banner />
+                <Banner id="careerBanner" backgroundImage={BackgroundImage} />
                 <section className="career-position">
                     <div className="container">
                         <div className="row">

@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import Nav from '../../commonTools/Nav';
 import Footer from '../../commonTools/Footer';
 import Banner from '../../commonTools/Banner';
+import BackgroundImage from '../../../assets/img/app.jpg';
 class Blog extends Component {
     render() {
         return (
             <div className="blog">
                <Nav/>
-               <Banner/>
+               <Banner id="blogBanner" backgroundImage={BackgroundImage}/>
                <div className="demo">
                    demo
 

@@ -2,15 +2,13 @@ import React, { Component } from 'react';
 import Nav from '../../commonTools/Nav';
 import Footer from '../../commonTools/Footer';
 import Banner from '../../commonTools/Banner';
-import Accordion from '../../commonTools/Accordion';
-
+import BackgroundImage from '../../../assets/img/event.jpg';
 class Service extends Component {
     render() {
         return (
-<div className="career">
+            <div className="career">
                 <Nav />
-                <Banner/>
-                <Accordion/>
+                <Banner id="serviceBanner" backgroundImage={BackgroundImage} />
                 <section className="cv-form">
                     <div className="container">
                         <div className="row">

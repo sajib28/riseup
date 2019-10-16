@@ -14,6 +14,7 @@ sans-serif;
 $red:#FF0000;
 $white:#ffffff;
 $black-light:#222;
+
 /* ----------- End  All Variable ----------- */
 /* ----------- Common css----------- */
 body {
@@ -38,9 +39,11 @@ h4 {}
 h5 {}
 
 h6 {}
-.firstWord{
-  color:$red;
+
+.firstWord {
+  color: $red;
 }
+
 section {
   padding: 80px 0;
 }
@@ -64,11 +67,19 @@ section {
 }
 
 #mainMenu {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  right: 0;
-
+    position: absolute;
+    top: 0;
+    width: 100%;
+    right: 0;
+    padding: 35px 0;
+    @include transition(all 0.3s ease-out);
+  &.sticky-header {
+    position: fixed;
+    padding: 8px 0;
+    background: #221f1f;
+    z-index: 999;
+    @include transition(all 0.3s ease);
+  }
   .navbar-brand {
     color: $white;
   }
@@ -171,7 +182,7 @@ section {
         text-align: left;
 
         svg {
-         @include transform(rotate(0deg));
+          @include transform(rotate(0deg));
           @include transition(all 0.3s ease-in-out);
           float: right;
         }
@@ -195,6 +206,15 @@ section {
 }
 
 /* ----------- End About page css----------- */
+
+
+/* ----------- Blog page css----------- */
+#blogBanner{
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+/* ----------- End Blog page css----------- */
 
 /* ----------- Footer css----------- */
 footer {

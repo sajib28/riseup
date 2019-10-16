@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import bannerBg from '../../assets/img/event.jpg';
-
+// style={{ backgroundImage: "url(" + bannerBg + ")" }}
 export default class Banner extends Component {
     render() {
         return (
-            <section className="banner middle-content" style={{ backgroundImage: "url(" + bannerBg + ")" }}>
+            <section id={this.props.id} className="banner middle-content" style={{ backgroundImage: `url(${this.props.backgroundImage})` }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
