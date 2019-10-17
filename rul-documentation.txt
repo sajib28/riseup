@@ -1,0 +1,7 @@
+https://github.com/rstaib/jquery-steps/wiki
+
+https://www.codeply.com/go/9UVy9OY4ij/bootstrap-step_by_step-form-example
+https://seiyria.com/bootstrap-slider/
+https://getbootstrap.com/docs/4.2/components/forms/
+
+http://www.jquery-steps.com/Examples#basic

@@ -9,7 +9,7 @@ class About extends Component {
                 <div>
                     About Page
             </div>
-            <Footer/>
+                <Footer />
             </div>
         )
     }

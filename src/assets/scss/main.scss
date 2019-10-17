@@ -67,19 +67,21 @@ section {
 }
 
 #mainMenu {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    right: 0;
-    padding: 35px 0;
-    @include transition(all 0.3s ease-out);
+  position: absolute;
+  top: 0;
+  width: 100%;
+  right: 0;
+  padding: 35px 0;
+  z-index: 999;
+  @include transition(all 0.3s ease-out);
+
   &.sticky-header {
     position: fixed;
     padding: 8px 0;
     background: #221f1f;
-    z-index: 999;
     @include transition(all 0.3s ease);
   }
+
   .navbar-brand {
     color: $white;
   }
@@ -97,11 +99,35 @@ section {
 }
 
 .banner {
+  position: relative;
+
   &.middle-content {
     display: flex;
     justify-content: left;
     align-items: center;
     min-height: 627px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+
+  &:before {
+    content: '';
+    background: rgba(0, 0, 0, .3);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    z-index: 9;
+  }
+
+  h1 {
+    z-index: 9;
+    position: relative;
+    color: $white;
   }
 }
 
@@ -110,7 +136,10 @@ section {
 /* ----------- Home Page css----------- */
 .home {
   #mainMenu {
-    background-color: transparent;
+    background: transparent;
+    &.sticky-header {
+      background: $black-light;
+    }
   }
 
   .intro {
@@ -209,11 +238,9 @@ section {
 
 
 /* ----------- Blog page css----------- */
-#blogBanner{
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
+#blogBanner {
 }
+
 /* ----------- End Blog page css----------- */
 
 /* ----------- Footer css----------- */

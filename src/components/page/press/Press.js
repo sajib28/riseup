@@ -6,7 +6,7 @@ import BackgroundImage from '../../../assets/img/event.jpg';
 class Press extends Component {
     render() {
         return (
-            <div className="career">
+            <div className="press">
             <Nav />
             <Banner id="PressBanner" backgroundImage={BackgroundImage} />
             <section className="cv-form">
